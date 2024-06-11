@@ -1,11 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
-import {
-  UserDashboard,
-  applicationList,
-} from "diracx-web-components/components";
+import { UserDashboard } from "diracx-web-components/components";
 import { ApplicationsContext } from "diracx-web-components/contexts";
 import { useSearchParamsUtils } from "diracx-web-components/hooks";
+import { applicationList } from "@/example-extension/applicationList";
 
 export default function Page() {
   const { getParam, setParam } = useSearchParamsUtils();
@@ -13,7 +11,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!getParam("appId")) {
-      setParam("appId", "Dashboard0");
+      setParam("appId", "Test App 1");
     }
   }, [getParam, setParam]);
 

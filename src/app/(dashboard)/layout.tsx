@@ -10,6 +10,8 @@ import {
 } from "diracx-web-components/contexts";
 import { useMUITheme } from "diracx-web-components/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { applicationList } from "@/example-extension/applicationList";
+import { defaultSections } from "@/example-extension/defaultSections";
 
 export default function DashboardLayout({
   children,
@@ -17,9 +19,13 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const theme = useMUITheme();
+
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const customLogoURL =
+    "https://raw.githubusercontent.com/DIRACGrid/management/81ba3d4ccc763d1d4b58878cbe6957f894c1576f/branding/diracx/svg/diracx-logo-full.svg";
   return (
     <section>
       <NavigationProvider
@@ -29,9 +35,12 @@ export default function DashboardLayout({
         }}
         getSearchParams={() => searchParams}
       >
-        <ApplicationsProvider>
+        <ApplicationsProvider
+          appList={applicationList}
+          defaultSections={defaultSections}
+        >
           <OIDCSecure>
-            <Dashboard>
+            <Dashboard logoURL={customLogoURL} drawerWidth={250}>
               <MUIThemeProvider theme={theme}>
                 <CssBaseline />
                 <Box
